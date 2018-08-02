@@ -18,24 +18,24 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 public class Selenium {
-    private String WEBDRIVER_GECKO = "webdriver.gecko.driver";
-    private String geckodriverPath = "/home/dell/Documents/INVEST/geckodriver";
-    private String PAGE_TITLE;
-    private String PAGE_HEADER="Guru99 Bank Manager HomePage";
+    public static String WEBDRIVER_GECKO = "webdriver.gecko.driver";
+    public static String geckodriverPath = "/home/dell/Documents/INVEST/geckodriver";
+    public static String PAGE_TITLE;
+    public static String PAGE_HEADER="Guru99 Bank Manager HomePage";
     WebDriver driver;
-    private String Warning_Message;
-    private String EXPECTED_ALERT_MESSAGE="User or Password is not valid";
-    private String SHEET_LOCATIO="/home/dell/Documents/seltest.xls";
+    public String Warning_Message;
+    public static String EXPECTED_ALERT_MESSAGE="User or Password is not valid";
+    public String SHEET_LOCATIO="/home/dell/Documents/seltest.xls";
     String sheetname="gtest";
+
+
 
 
 
 
 @Test
 public void validateLogin() throws InterruptedException, IOException, BiffException {
-
-
-        String up[][]=getfromExcel(SHEET_LOCATIO,sheetname);
+        String up[][]=TestHelper.getfromExcel(SHEET_LOCATIO,sheetname); //get input data from excel sheet
         for (int i=0;i<up.length;i++){
             String username=up[i][0];
             String password=up[i][1];
@@ -58,8 +58,7 @@ public void validateLogin() throws InterruptedException, IOException, BiffExcept
         WebElement butt = findElementbyName("btnLogin");
         butt.click();
         waitinSeconds(5);
-        PAGE_TITLE = driver.getTitle();
-        setPAGE_TITLE(PAGE_TITLE);
+
 
 
         Alert alert= null; try {
@@ -87,8 +86,13 @@ public void validateLogin() throws InterruptedException, IOException, BiffExcept
             }
 
         }
+        closedriver();
 
     return loginStatus;
+    }
+
+    public void closedriver(){
+    driver.close();
     }
 
     public WebElement findElementbyName(String ByName) {
@@ -132,7 +136,7 @@ public void validateLogin() throws InterruptedException, IOException, BiffExcept
     }
 
     public void gettet() throws IOException, BiffException {
-        String up[][]=getfromExcel(SHEET_LOCATIO,sheetname);
+        String up[][]=TestHelper.getfromExcel(SHEET_LOCATIO,sheetname);
         for (int i=0;i<up.length;i++){
             String username=up[i][0];
             String password=up[i][1];
@@ -151,29 +155,6 @@ public void validateLogin() throws InterruptedException, IOException, BiffExcept
 
 
 
-
-    @Test
-    public String[][] getfromExcel(String SHEET_LOCATION,String SHEET_NAME) throws IOException, BiffException {
-
-        Workbook workbook= Workbook.getWorkbook(new File(SHEET_LOCATION));
-        Sheet sheet=workbook.getSheet(SHEET_NAME);
-        int rowcount=sheet.getRows();
-        int columncount=sheet.getColumns();
-
-        String[][] cresds=null;
-        cresds=new String[rowcount-1][columncount];
-
-        int credrow=0;
-        for (int row=1;row<=rowcount-1;row++,credrow++) {
-            int credcol=0;
-            for (int column = 0; column <= columncount-1; column++,credcol++) {
-               cresds[credrow][credcol]=sheet.getCell(column,row).getContents();
-            }
-        }
-
-        return (cresds);
-
-    }
 
 
 
