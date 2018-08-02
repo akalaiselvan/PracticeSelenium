@@ -30,8 +30,9 @@ public class Selenium {
 
 
 
-    @Test
-    public void validateLogin() throws InterruptedException, IOException, BiffException {
+
+@Test
+public void validateLogin() throws InterruptedException, IOException, BiffException {
 
 
         String up[][]=getfromExcel(SHEET_LOCATIO,sheetname);
@@ -115,7 +116,6 @@ public class Selenium {
     }
 
 
-    @BeforeTest
     public void getThisLink(String URL) {
         System.setProperty(getWEBDRIVER_GECKO(), getGeckodriverPath());
         FirefoxProfile profile=new FirefoxProfile();
