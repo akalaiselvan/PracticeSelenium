@@ -7,6 +7,7 @@ import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -78,6 +79,13 @@ public void validateLogin() throws InterruptedException, IOException, BiffExcept
         } catch (NoAlertPresentException exception) {
             PAGE_TITLE = driver.getTitle();
             setPAGE_TITLE(PAGE_TITLE);
+            String check=findElementbyTagname("tbody");
+            System.out.println(check);
+            try {
+                Assert.assertTrue(check.contains("Manger Id : mngr"));
+            } catch (AssertionError e) {
+                TestHelper.takeScreenshot(driver,"/home/dell/Documents/Failcase.png");
+                System.out.println("Desired text not found in header");            }
             if (getPAGE_TITLE().equals(PAGE_HEADER)) {
                 System.out.println("Login Sucessfull.Test passed for"+username+"and"+password);
                 loginStatus=true;
@@ -99,6 +107,12 @@ public void validateLogin() throws InterruptedException, IOException, BiffExcept
         By Name = By.name(ByName);
         WebElement webElement = driver.findElement(Name);
         return webElement;
+    }
+
+    public String findElementbyTagname(String tagname){
+    By findtagname = By.tagName(tagname);
+    String finddtag= driver.findElement(findtagname).getText();
+    return finddtag;
     }
 
     public boolean checkAssertEquals(String text1, String text2) {

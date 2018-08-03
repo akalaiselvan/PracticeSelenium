@@ -22,6 +22,8 @@ public class DataProviderTest {
         selenium.login(username,password);
 
     }
+    public void verifytext(){
+    }
 
     public void closedriver(){
         selenium.closedriver();
