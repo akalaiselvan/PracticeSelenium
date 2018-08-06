@@ -1,3 +1,4 @@
+import com.google.common.io.Files;
 import jxl.Sheet;
 import jxl.Workbook;
 import jxl.read.biff.BiffException;
@@ -32,9 +33,10 @@ public class TestHelper {
 
     }
 
-    public static void takeScreenshot(WebDriver webDriver,String filepath){
+    public static void takeScreenshot(WebDriver webDriver,String filepath) throws IOException {
         TakesScreenshot screenshot=((TakesScreenshot)webDriver);
         File tosave=screenshot.getScreenshotAs(OutputType.FILE);
+        Files.copy(tosave, new File(filepath));
     }
 
 

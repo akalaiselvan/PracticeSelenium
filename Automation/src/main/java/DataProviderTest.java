@@ -18,7 +18,7 @@ public class DataProviderTest {
     }
 
     @Test(dataProvider = "login")
-    public void setup(String username , String password) throws InterruptedException {
+    public void setup(String username , String password) throws InterruptedException, IOException {
         selenium.login(username,password);
 
     }

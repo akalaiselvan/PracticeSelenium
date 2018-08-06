@@ -46,7 +46,7 @@ public void validateLogin() throws InterruptedException, IOException, BiffExcept
     }
 
 
-    public boolean login(String username,String password) throws InterruptedException {
+    public boolean login(String username,String password) throws InterruptedException, IOException {
         boolean loginStatus=false;
         getThisLink("http://demo.guru99.com/v4/");
         waitinSeconds(2);
@@ -56,6 +56,7 @@ public void validateLogin() throws InterruptedException, IOException, BiffExcept
         WebElement pw = findElementbyName("password");
         pw.sendKeys(password);
         waitinSeconds(2);
+        TestHelper.takeScreenshot(driver,"/home/dell/Documents/Failcase.png");
         WebElement butt = findElementbyName("btnLogin");
         butt.click();
         waitinSeconds(5);
