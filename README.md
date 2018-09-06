@@ -1,2 +1,3 @@
 # PracticeSelenium
-Working in and around selenium 
+
+*practice selenium methods 
